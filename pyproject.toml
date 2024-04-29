@@ -5,7 +5,7 @@ description = ""
 authors = ["JoeCap <kapt.tesla@gmail.com>"]
 readme = "README.md"
 packages = [
-    { include = "gendiff" }
+    { include = "gendiff" },
 ]
 
 
