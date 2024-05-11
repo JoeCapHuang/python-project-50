@@ -4,4 +4,4 @@ dist/
 *.cast
 .venv/
 .idea/
-.json
+*.json
