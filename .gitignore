@@ -6,3 +6,4 @@ dist/
 .idea/
 Json files/
 .coverage
+coverage.xml
