@@ -7,5 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: linter and tests
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          make install
+      - name: linter and test
         run: make lint
