@@ -4,6 +4,5 @@ dist/
 *.cast
 .venv/
 .idea/
-Json files/
 .coverage
 coverage.xml
