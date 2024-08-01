@@ -8,6 +8,10 @@ from gendiff import generate_diff
                               "tests/fixtures/file2.json",
                               "tests/fixtures/expected_result"
                               ),
+                             ("tests/fixtures/file1.yaml",
+                              "tests/fixtures/file2.yaml",
+                              "tests/fixtures/expected_result"
+                              ),
                           ]
                          )
 def test_generate_diff(filepath1, filepath2, expected_filepath):
