@@ -6,11 +6,11 @@ from gendiff import generate_diff
                          [
                              ("tests/fixtures/file1.json",
                               "tests/fixtures/file2.json",
-                              "tests/fixtures/expected_result"
+                              "tests/fixtures/stylish_result"
                               ),
                              ("tests/fixtures/file1.yaml",
                               "tests/fixtures/file2.yaml",
-                              "tests/fixtures/expected_result"
+                              "tests/fixtures/stylish_result"
                               ),
                           ]
                          )
