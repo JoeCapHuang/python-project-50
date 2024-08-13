@@ -2,11 +2,11 @@ import argparse
 from gendiff.pars_file import pars_file
 
 
-def normalize_value(value):
-    if value is False or True:
-        return str(value).lower()
-    else:
-        return value
+# def normalize_value(value):
+#     if value is False or True:
+#         return str(value).lower()
+#     else:
+#         return value
 
 
 def pars_arg():
@@ -29,7 +29,7 @@ def gen_diff(filepath1, filepath2) -> str:
 
         result = '{\n'
         for key, value in sorted(file1.items()):
-            value = normalize_value(value)
+            # value = normalize_value(value)
             if key in file2 and value == file2[key]:
                 result += f'    {key}: {value}\n'
             elif key not in file2 or value != file2[key]:
