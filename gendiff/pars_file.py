@@ -3,8 +3,6 @@ import yaml
 
 
 def pars_file(file, ext):
-
-
     match ext:
         case '.json':
             return json.load(file)
