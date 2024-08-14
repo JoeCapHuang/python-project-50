@@ -3,11 +3,11 @@ import yaml
 import os
 
 
-def pars_file(file):
+def pars_file(file, ext):
 
-    file_ext = os.path.splitext(file)[-1].lower()
+    # file_ext = os.path.splitext(file)[-1].lower()
 
-    match file_ext:
+    match ext:
         case '.json':
             return json.load(file)
         case '.yaml' | '.yml':
