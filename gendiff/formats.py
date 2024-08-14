@@ -42,24 +42,24 @@ def stylish(tree):
             old_value = value.get('old_value')
             new_value = value.get('new_value')
             children = value.get('children')
-            if value_type == 'nested':
-                lines.append(f"{current_indent}"
-                             f"  {key}: {inner(children, depth + 1)}")
-            elif value_type == 'unchanged':
-                lines.append(f"{current_indent}"
-                             f"  {key}: {norm_value(in_value)}")
-            elif value_type == 'changed':
-                lines.append(f"{current_indent}"
-                             f"- {key}: {norm_value(old_value, depth)}")
-                lines.append(f"{current_indent}"
-                             f"+ {key}: {norm_value(new_value, depth)}")
-            elif value_type == 'added':
-                lines.append(f"{current_indent}"
-                             f"+ {key}: {norm_value(in_value, depth)}")
-            elif value_type == 'deleted':
-                lines.append(f"{current_indent}"
-                             f"- {key}: {norm_value(in_value, depth)}")
-
+            match value_type:
+                case 'nested':
+                    lines.append(f"{current_indent}"
+                                 f"  {key}: {inner(children, depth + 1)}")
+                case 'unchanged':
+                    lines.append(f"{current_indent}"
+                                 f"  {key}: {norm_value(in_value)}")
+                case 'changed':
+                    lines.append(f"{current_indent}"
+                                 f"- {key}: {norm_value(old_value, depth)}")
+                    lines.append(f"{current_indent}"
+                                 f"+ {key}: {norm_value(new_value, depth)}")
+                case 'added':
+                    lines.append(f"{current_indent}"
+                                 f"+ {key}: {norm_value(in_value, depth)}")
+                case 'deleted':
+                    lines.append(f"{current_indent}"
+                                 f"- {key}: {norm_value(in_value, depth)}")
         current_indent = SPACE * (SPACES_PER_LEVEL * depth - SPACES_PER_LEVEL)
         result = itertools.chain(["{"], lines, [current_indent + "}"])
         return '\n'.join(result)
