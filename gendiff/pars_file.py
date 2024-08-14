@@ -1,11 +1,9 @@
 import json
 import yaml
-import os
 
 
 def pars_file(file, ext):
 
-    # file_ext = os.path.splitext(file)[-1].lower()
 
     match ext:
         case '.json':
