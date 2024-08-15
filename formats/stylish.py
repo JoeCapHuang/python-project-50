@@ -3,6 +3,7 @@ import itertools
 SPACES_PER_LEVEL = 4
 LEFT_SHIFT = 2
 SPACE = ' '
+START_DEPTH = 1
 
 
 def normalize_val(value, depth=1):
@@ -27,11 +28,11 @@ def flat_dict(some_dict, depth):
         else:
             lines.append(f"{indent}{key}: {value}")
     indent = SPACE * (SPACES_PER_LEVEL * depth - SPACES_PER_LEVEL)
-    result = itertools.chain(["{"], lines, [indent + "}"])
+    result = itertools.chain("{", lines, [indent + "}"])
     return '\n'.join(result)
 
 
-def stylish(tree):
+def gen_stylish(tree):
     def inner(node, depth):
         lines = []
         current_indent = SPACE * (SPACES_PER_LEVEL * depth - LEFT_SHIFT)
@@ -62,7 +63,8 @@ def stylish(tree):
                     lines.append(f"{current_indent}"
                                  f"- {key}: {normalize_val(in_value, depth)}")
         current_indent = SPACE * (SPACES_PER_LEVEL * depth - SPACES_PER_LEVEL)
-        result = itertools.chain(["{"], lines, [current_indent + "}"])
+        result = itertools.chain("{", lines, [current_indent + "}"])
         return '\n'.join(result)
 
-    return inner(tree, 1)
+    return inner(tree, START_DEPTH)
+
