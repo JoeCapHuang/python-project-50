@@ -19,6 +19,11 @@ from gendiff import generate_diff
                               "tests/fixtures/plain_result",
                               "plain"
                               ),
+                             ("tests/fixtures/file1.json",
+                              "tests/fixtures/file2.json",
+                              "tests/fixtures/json_result",
+                              "json"
+                              ),
                           ]
                          )
 def test_generate_diff(filepath1, filepath2, expected_filepath, format_name):
