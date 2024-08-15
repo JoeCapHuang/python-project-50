@@ -6,15 +6,15 @@ START_PATH = ''
 def normalize_val(value):
     if isinstance(value, dict):
         return '[complex value]'
-    if isinstance(value, str):
-        return f"'{value}'"
     match value:
-        case False:
+        case False | 'false' :
             return 'false'
-        case True:
+        case True | 'true':
             return 'true'
         case None:
             return 'null'
+    if isinstance(value, str):
+        return f"'{value}'"
     return value
 
 
