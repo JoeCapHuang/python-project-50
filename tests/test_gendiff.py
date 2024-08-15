@@ -24,7 +24,7 @@ from gendiff import generate_diff
                               "tests/fixtures/json_result",
                               "json"
                               ),
-                          ]
+                         ]
                          )
 def test_generate_diff(filepath1, filepath2, expected_filepath, format_name):
     with (
