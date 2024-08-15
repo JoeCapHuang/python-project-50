@@ -67,4 +67,3 @@ def gen_stylish(tree):
         return '\n'.join(result)
 
     return inner(tree, START_DEPTH)
-

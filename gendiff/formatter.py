@@ -1,5 +1,5 @@
-from formats.plain import gen_plain
-from formats.stylish import gen_stylish
+from gendiff.formats.stylish import gen_stylish
+from gendiff.formats.plain import gen_plain
 
 
 def formatter(tree: dict, format_name):
