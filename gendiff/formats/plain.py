@@ -7,7 +7,7 @@ def normalize_val(value):
     if isinstance(value, dict):
         return '[complex value]'
     match value:
-        case False | 'false' :
+        case False | 'false':
             return 'false'
         case True | 'true':
             return 'true'
