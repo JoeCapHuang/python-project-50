@@ -38,30 +38,34 @@ def gen_stylish(tree):
         current_indent = SPACE * (SPACES_PER_LEVEL * depth - LEFT_SHIFT)
 
         for key, value in node.items():
-            value_type = value.get('type')
             in_value = value.get('value')
-            old_value = value.get('old_value')
-            new_value = value.get('new_value')
-            children = value.get('children')
 
-            match value_type:
+            match value.get('type'):
                 case 'nested':
                     lines.append(f"{current_indent}"
-                                 f"  {key}: {inner(children, depth + 1)}")
+                                 f"  {key}: "
+                                 f"{inner(value.get('children'), depth + 1)}")
+
                 case 'unchanged':
                     lines.append(f"{current_indent}"
                                  f"  {key}: {normalize_val(in_value)}")
+
                 case 'changed':
                     lines.append(f"{current_indent}"
-                                 f"- {key}: {normalize_val(old_value, depth)}")
+                                 f"- {key}: "
+                                 f"{normalize_val(value.get('old_value'), depth)}")
                     lines.append(f"{current_indent}"
-                                 f"+ {key}: {normalize_val(new_value, depth)}")
+                                 f"+ {key}: "
+                                 f"{normalize_val(value.get('new_value'), depth)}")
+
                 case 'added':
                     lines.append(f"{current_indent}"
                                  f"+ {key}: {normalize_val(in_value, depth)}")
+
                 case 'deleted':
                     lines.append(f"{current_indent}"
                                  f"- {key}: {normalize_val(in_value, depth)}")
+
         current_indent = SPACE * (SPACES_PER_LEVEL * depth - SPACES_PER_LEVEL)
         result = itertools.chain("{", lines, [current_indent + "}"])
         return '\n'.join(result)
