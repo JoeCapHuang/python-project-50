@@ -1,5 +1,5 @@
 import json
 
 
-def gen_json(tree):
+def format_json(tree):
     return json.dumps(tree, indent=4)
