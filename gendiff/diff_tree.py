@@ -2,7 +2,7 @@
 
 def build_diff_tree(node1, node2):
     diff_tree = {}
-    keys = sorted(set(node1.keys()).union(node2.keys()))
+    keys = sorted(set(node1.keys()) | set(node2.keys()))
     for key in keys:
         if key not in node2:
             diff_tree[key] = {
