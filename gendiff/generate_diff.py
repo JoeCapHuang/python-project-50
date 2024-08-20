@@ -4,15 +4,23 @@ from gendiff.formatter import formatter
 import os
 
 
+def open_and_get_ext(filepath):
+    return open(filepath), os.path.splitext(filepath)[-1].lower()
+
+
 def gen_diff(filepath1, filepath2, format_name="stylish") -> str:
-    with (
-        open(filepath1) as file1,
-        open(filepath2) as file2,
-    ):
-        file_ext1 = os.path.splitext(filepath1)[-1].lower()
-        file_ext2 = os.path.splitext(filepath2)[-1].lower()
-        file1 = pars_file(file1, file_ext1)
-        file2 = pars_file(file2, file_ext2)
-        diff_tree = build_diff_tree(file1, file2)
+    file1, file_ext1 = open_and_get_ext(filepath1)
+    file2, file_ext2 = open_and_get_ext(filepath2)
+
+    try:
+        first_file = pars_file(file1, file_ext1)
+        second_file = pars_file(file2, file_ext2)
+
+        diff_tree = build_diff_tree(first_file, second_file)
         result = formatter(diff_tree, format_name)
-        return result
+
+    finally:
+        file1.close()
+        file2.close()
+
+    return result
