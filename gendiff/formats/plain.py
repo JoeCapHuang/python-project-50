@@ -9,30 +9,17 @@ def normalize_val(value):
     match value:
         case False | 'false':
             return 'false'
+
         case True | 'true':
             return 'true'
+
         case None:
             return 'null'
+
     if isinstance(value, str):
         return f"'{value}'"
+
     return value
-
-
-def gen_line(path, value_type, value):
-    action = ''
-    value = normalize_val(value)
-    match value_type:
-        case 'added':
-            action = f'added with value: {value}'
-        case 'deleted':
-            action = 'removed'
-        case 'changed':
-            old_value, new_value = value
-            action = (f'updated. From '
-                      f'{normalize_val(old_value)}'
-                      f' to {normalize_val(new_value)}')
-    if action:
-        return f"Property '{path}' was {action}"
 
 
 def gen_plain(tree):
@@ -40,21 +27,28 @@ def gen_plain(tree):
         lines = []
 
         for key, value in node.items():
-            value_type = value.get('type')
-            in_value = value.get('value')
-            old_value = value.get('old_value')
-            new_value = value.get('new_value')
-            children = value.get('children')
+            in_value = normalize_val(value.get('value'))
+            old_value = normalize_val(value.get('old_value'))
+            new_value = normalize_val(value.get('new_value'))
             new_path = f"{current_path}.{key}" if current_path else key
+            action = ''
 
-            match value_type:
+            match value.get('type'):
                 case 'nested':
-                    lines.extend(inner(children, new_path))
-                case 'added' | 'deleted' | 'changed':
-                    lines.append(
-                        gen_line(new_path, value_type,
-                                 in_value if value_type != 'changed'
-                                 else (old_value, new_value)))
+                    lines.extend(inner(value.get('children'), new_path))
+
+                case 'added':
+                    action = f'added with value: {in_value}'
+
+                case 'deleted':
+                    action = 'removed'
+
+                case 'changed':
+                    action = f'updated. From {old_value} to {new_value}'
+
+            if action:
+                lines.append(f"Property '{new_path}' was {action}")
+
         return lines
 
     return '\n'.join(inner(tree, START_PATH))
