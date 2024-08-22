@@ -22,7 +22,7 @@ def normalize_val(value):
     return value
 
 
-def gen_plain(tree):
+def format_plain(tree):
     def inner(node, current_path):
         lines = []
 

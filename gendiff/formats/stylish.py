@@ -32,7 +32,7 @@ def flat_dict(some_dict, depth):
     return '\n'.join(result)
 
 
-def gen_stylish(tree):
+def format_stylish(tree):
     def inner(node, depth):
         lines = []
         current_indent = SPACE * (SPACES_PER_LEVEL * depth - LEFT_SHIFT)
