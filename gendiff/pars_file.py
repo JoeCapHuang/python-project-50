@@ -1,9 +1,12 @@
 import json
 import yaml
+import os
 
 
-def pars_file(file, ext):
-    match ext:
+def open_and_parse_file(filepath):
+    file, file_extension = open(filepath), os.path.splitext(filepath)[-1].lower()
+
+    match file_extension:
         case '.json':
             return json.load(file)
         case '.yaml' | '.yml':
