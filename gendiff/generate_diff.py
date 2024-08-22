@@ -8,7 +8,7 @@ def open_and_get_ext(filepath):
     return open(filepath), os.path.splitext(filepath)[-1].lower()
 
 
-def gen_diff(filepath1, filepath2, format_name="stylish") -> str:
+def gendiff(filepath1, filepath2, format_name="stylish") -> str:
     file1, file_ext1 = open_and_get_ext(filepath1)
     file2, file_ext2 = open_and_get_ext(filepath2)
 

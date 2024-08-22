@@ -8,7 +8,7 @@ START_DEPTH = 1
 
 def normalize_val(value, depth=1):
     if isinstance(value, dict):
-        return flat_dict(value, depth + 1)
+        return make_flat_dict(value, depth + 1)
     match value:
         case False:
             return 'false'
@@ -19,12 +19,12 @@ def normalize_val(value, depth=1):
     return value
 
 
-def flat_dict(some_dict, depth):
+def make_flat_dict(some_dict, depth):
     indent = SPACE * (SPACES_PER_LEVEL * depth)
     lines = []
     for key, value in some_dict.items():
         if isinstance(value, dict):
-            lines.append(f"{indent}{key}: {flat_dict(value, depth + 1)}")
+            lines.append(f"{indent}{key}: {make_flat_dict(value, depth + 1)}")
         else:
             lines.append(f"{indent}{key}: {value}")
     indent = SPACE * (SPACES_PER_LEVEL * depth - SPACES_PER_LEVEL)
